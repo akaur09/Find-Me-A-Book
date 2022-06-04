@@ -1,1 +1,4 @@
-// Define the query and mustation functioanlity to work with the Mongoose models
+// Define the query and mutation functioanlity to work with the Mongoose models
+const { User} = require ('../models');
+const {signToken}= require('../utils/auth');
+const {AuthenticationError} = require('apollo-server-express');
