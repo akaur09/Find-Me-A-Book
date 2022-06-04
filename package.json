@@ -16,6 +16,7 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.6",
     "mongo": "^0.1.0"
   }
 }
