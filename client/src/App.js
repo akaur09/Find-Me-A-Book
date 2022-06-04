@@ -4,6 +4,8 @@ import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 
+// TODO: create Apollo provider to make every request work w/ Apollo Server
+
 function App() {
   return (
     <Router>
