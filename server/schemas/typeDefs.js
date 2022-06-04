@@ -1,5 +1,36 @@
+// import gql tagged template from apollo server
+const {gql} = require ('appolo-server-express');
 // TODO: Define Query and Mutation types
-
+const typeDefs = gql `
+    type Query{
+        me: User
+    }
+    type Mutation{
+        login (email:String!, password:String!): Auth
+        addUser(username:String!, emailString!, password:String!): Auth
+        saveBook(input: savedBook!): User
+        removeBook(bookId!): User
+    }
+    type User{
+        _id: ID!
+        username: String
+        email: String
+        bookCount: Int
+        savedBooks: [Book]
+    }
+    type Book{
+        bookId: String
+        authors: [String]
+        description: String
+        title: String
+        image: String
+        link: String
+    }
+    type Auth{
+        token: ID!
+        user: User
+    }
+`;
 // QUERY type:
     // me which returns user type
 
