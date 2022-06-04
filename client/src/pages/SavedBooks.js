@@ -9,6 +9,7 @@ import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap
 // import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
+import { deleteBook } from '../utils/API';
 
 const SavedBooks = () => {
   // const [userData, setUserData] = useState({});
@@ -32,14 +33,18 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await useMutation(bookId, token);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const updatedUser = await response.json();
-      setUserData(updatedUser);
+      // change function
+      await deleteBook({
+        variables: {bookId: bookId},
+        update: cache => {
+          const data = cache.readQuery({query: GET_ME});
+          const userDataCache = data.me;
+          const savedBooksCache = userDataCache.savedBooks;
+          const updatedBookCache = savedBooksCache.filter((book)=> book.bookId !== bookId);
+          data.me.savedBooks = updatedBookCache;
+          cache.writeQuery({ guery: GET_ME, data: {data: {...data.me.savedBooks}}});
+        }
+      })
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
