@@ -26,5 +26,16 @@ export const ADD_USER = gql`
     }
 `;
 // TODO: SAVE_BOOK - exectue saveBook
-
+export const SAVE_BOOK = gql`
+    mutation saveBook($id: ID!){
+        saveBook(bookId: $id){
+            bookId
+            authors
+            description
+            image
+            link
+            title
+        }
+    }
+`;
 // TODO: REMOVE_BOOK - execute removeBook
