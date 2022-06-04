@@ -31,6 +31,8 @@ const typeDefs = gql `
         user: User
     }
 `;
+// export
+module.exports = typeDefs;
 // QUERY type:
     // me which returns user type
 
