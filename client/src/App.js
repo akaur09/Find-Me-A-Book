@@ -5,6 +5,28 @@ import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 
 // TODO: create Apollo provider to make every request work w/ Apollo Server
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+
+const httpLink = createHttpLink ({
+  uri: '/graphql',
+});
+const authLink = setContext((_, {headers}) => {
+  //  get auth token if exists
+  const token = localStorage.getItem('id_token');
+  // return headers to the context to be read by httpLink
+  return{
+    headers: {
+      ...headers,
+      authorization:toekn ? `Bearer ${token}`: '',
+    },
+  };
+});
 
 function App() {
   return (
