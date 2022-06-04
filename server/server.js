@@ -8,6 +8,13 @@ const db = require('./config/connection');
 const routes = require('./routes');
 
 const app = express();
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost:27017/merndb',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+);
 const PORT = process.env.PORT || 3001;
 // call on Apollo server
 const server = new ApolloServer({
